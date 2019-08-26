@@ -35,8 +35,8 @@ public class Role {
 		}
 	}
 	
-	public int reverse(int x, int y, int type) {
-		int sum = 0;
+	public int reverseRight(int x, int y , int type ,int sum)
+	{
 		for(int i = x , in = 0; i < 10 ; ++i)
 		{
 		
@@ -61,6 +61,11 @@ public class Role {
 	
 			}
 		}
+		return sum;
+	}
+	
+	public int reverseLeft(int x, int y , int type ,int sum)
+	{
 		for(int i = x , in = 0; i > -1 ; --i)
 		{
 	
@@ -84,6 +89,11 @@ public class Role {
 				}
 			}
 		}
+		return sum;
+	}
+	
+	public int reverseDown(int x, int y , int type ,int sum)
+	{
 		for(int i = y , in = 0; i < 10 ; ++i)
 		{
 		
@@ -109,6 +119,12 @@ public class Role {
 			}
 			
 		}
+		return sum;
+		
+	}
+	
+	public int reverseUp(int x, int y , int type ,int sum)
+	{
 		for(int i = y, in = 0 ; i > -1 ; --i)
 		{
 
@@ -132,6 +148,10 @@ public class Role {
 				};
 			}
 		}
+		return sum;
+	}
+	public int reverseRightAndDown(int x, int y , int type ,int sum)
+	{
 		for(int i = 1;;)
 		{
 
@@ -155,6 +175,11 @@ public class Role {
 			}
 			++i;
 		}
+		return sum;
+	}
+	
+	public int reverseLeftAndUp(int x, int y , int type ,int sum)
+	{
 		for(int i = 1;;)
 		{
 			if(x-i < 0 || y-i < 0)
@@ -177,6 +202,10 @@ public class Role {
 			++i;		
 
 		}
+		return sum;
+	}
+	public int reverseLeftAndDown(int x, int y , int type ,int sum)
+	{
 		for(int i = 1;;)
 		{
 			if(x-i < 0 || y+i > 9)
@@ -199,6 +228,10 @@ public class Role {
 			++i;
 
 		}
+		return sum;
+	}
+	public int reverseRightAndUp(int x, int y , int type ,int sum)
+	{
 		for(int i = 1;;)
 		{
 			if(x+i > 9 || y-i < 0)
@@ -221,80 +254,29 @@ public class Role {
 			++i;
 
 		}
-//		for(int i = x ; i < 10 ; ++i)
-//		{
-//			for(int j = y ; j < 10 ; ++j)
-//			{
-//				if(board[i][j] == type)
-//				{
-//					for(int m = x ; m < i ; ++m)
-//					{
-//						for(int n = y ; n < j ; ++n)
-//						{
-//							board[m+1][n+1] = type;
-//						}
-//					}
-//				}
-//
-//			}
-//		}
-//		for(int i = x ; i > -1 ; --i)
-//		{
-//			for(int j = y ; j > -1 ; --j)
-//			{
-//				if(board[i][j] == type)
-//				{
-//					for(int m = x ; m > i ; --m)
-//					{
-//						for(int n = y ; n > j ; --n)
-//						{
-//							board[m-1][n-1] = type;
-//						}
-//					}
-//				}
-//
-//			}
-//		}
-//		for(int i = x ; i < 10 ; ++i)
-//		{
-//			for(int j = y ; j > -1 ; --j)
-//			{
-//				if(board[i][j] == type)
-//				{
-//					for(int m = x ; m < i ; ++m)
-//					{
-//						for(int n = y ; n > j ; --n)
-//						{
-//							board[m+1][n-1] = type;
-//						}
-//					}
-//				}
-//
-//			}
-//		}
-//		for(int i = x ; i > -1 ; --i)
-//		{
-//			for(int j = y ; j < 10 ; ++j)
-//			{
-//				if(board[i][j] == type)
-//				{
-//					for(int m = x ; m > i ; --m)
-//					{
-//						for(int n = y ; n < j ; ++n)
-//						{
-//							board[m-1][n+1] = type;
-//						}
-//					}
-//				}
-//
-//			}
-//		}
+		return sum;
+	}
+	
+	public int shout(int sum) {
 		if(sum >= 8)
 			return 1;
 		else if(sum >= 5)
 			return 2;
 		else 
 			return 0;
+	}
+	
+	public int reverse(int x, int y, int type) {
+		int sum = 0;
+		sum = reverseRight(x,y,type,sum);
+		sum = reverseLeft(x,y,type,sum);
+		sum = reverseUp(x,y,type,sum);
+		sum = reverseDown(x,y,type,sum);
+		sum = reverseRightAndUp(x,y,type,sum);
+		sum = reverseRightAndDown(x,y,type,sum);
+		sum = reverseLeftAndUp(x,y,type,sum);
+		sum = reverseLeftAndDown(x,y,type,sum);
+		return shout(sum);
 		
 	}
 	
