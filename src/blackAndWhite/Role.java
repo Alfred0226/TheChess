@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class Role {
 	private int[][] board = new int[10][10];
-
+	private ReverseDirection rd;
+	
 	public Role() { // 初始化資料,type1為路障,type2,3為旗子,type4為可移動路徑
 		Random ran = new Random();
 		for (int i = 0; i < 7;) {
@@ -21,6 +22,7 @@ public class Role {
 		setBoard(4, 5, 3);
 		setBoard(5, 4, 3);
 		canMove(2);
+		
 	}
 
 	public void printMap() // 印出棋盤
@@ -33,180 +35,7 @@ public class Role {
 		}
 	}
 
-	public int reverseRight(int x, int y, int type, int sum) {
-		for (int i = x, in = 0; i < 10; ++i) {
 
-			if (board[i][y] == 1 || board[i][y] == 4 || board[i][y] == 0) {
-				break;
-			} else if (board[i][y] == type) {
-				for (int j = x; j < i; ++j) {
-					board[j][y] = type;
-					++in;
-					++sum;
-
-				}
-				if (in >= 1) {
-					--sum;
-					break;
-				}
-
-			}
-		}
-		return sum;
-	}
-
-	public int reverseLeft(int x, int y, int type, int sum) {
-		for (int i = x, in = 0; i > -1; --i) {
-
-			if (board[i][y] == 1 || board[i][y] == 4 || board[i][y] == 0) {
-				break;
-			} else if (board[i][y] == type) {
-				for (int j = x; j > i; --j) {
-					board[j][y] = type;
-					++in;
-					++sum;
-
-				}
-				if (in >= 1) {
-					--sum;
-					break;
-				}
-			}
-		}
-		return sum;
-	}
-
-	public int reverseDown(int x, int y, int type, int sum) {
-		for (int i = y, in = 0; i < 10; ++i) {
-
-			if (board[x][i] == 1 || board[x][i] == 4 || board[x][i] == 0) {
-				break;
-			} else if (board[x][i] == type) {
-				for (int j = y; j < i; ++j) {
-
-					board[x][j] = type;
-					++in;
-					++sum;
-
-				}
-				if (in >= 1) {
-					--sum;
-					break;
-				}
-				;
-			}
-
-		}
-		return sum;
-
-	}
-
-	public int reverseUp(int x, int y, int type, int sum) {
-		for (int i = y, in = 0; i > -1; --i) {
-
-			if (board[x][i] == 1 || board[x][i] == 4 || board[x][i] == 0) {
-				break;
-			} else if (board[x][i] == type) {
-				for (int j = y; j > i; --j) {
-					board[x][j] = type;
-					++in;
-					++sum;
-
-				}
-				if (in >= 1) {
-					--sum;
-					break;
-				}
-				;
-			}
-		}
-		return sum;
-	}
-
-	public int reverseRightAndDown(int x, int y, int type, int sum) {
-		for (int i = 1;;) {
-
-			if (x + i > 9 || y + i > 9)
-				break;
-
-			if (board[x + i][y + i] == 1 || board[x + i][y + i] == 4 || board[x + i][y + i] == 0) {
-				break;
-			} else if (board[x + i][y + i] == type) {
-				int j = 1;
-				while (x + j < x + i && y + j < y + i) {
-					board[x + j][y + j] = type;
-					++sum;
-					++j;
-				}
-				break;
-			}
-			++i;
-		}
-		return sum;
-	}
-
-	public int reverseLeftAndUp(int x, int y, int type, int sum) {
-		for (int i = 1;;) {
-			if (x - i < 0 || y - i < 0)
-				break;
-			if (board[x - i][y - i] == 1 || board[x - i][y - i] == 4 || board[x - i][y - i] == 0) {
-				break;
-			} else if (board[x - i][y - i] == type) {
-				int j = 1;
-				while (x - j > x - i && y - j > y - i) {
-					board[x - j][y - j] = type;
-					++sum;
-					++j;
-				}
-				break;
-			}
-			++i;
-
-		}
-		return sum;
-	}
-
-	public int reverseLeftAndDown(int x, int y, int type, int sum) {
-		for (int i = 1;;) {
-			if (x - i < 0 || y + i > 9)
-				break;
-			if (board[x - i][y + i] == 1 || board[x - i][y + i] == 4 || board[x - i][y + i] == 0) {
-				break;
-			} else if (board[x - i][y + i] == type) {
-				int j = 1;
-				while (x - j > x - i && y + j < y + i) {
-					board[x - j][y + j] = type;
-					++sum;
-					++j;
-				}
-				break;
-			}
-			++i;
-
-		}
-		return sum;
-	}
-
-	public int reverseRightAndUp(int x, int y, int type, int sum) {
-		for (int i = 1;;) {
-			if (x + i > 9 || y - i < 0)
-				break;
-			if (board[x + i][y - i] == 1 || board[x + i][y - i] == 4 || board[x + i][y - i] == 0) {
-				break;
-			} else if (board[x + i][y - i] == type) {
-				int j = 1;
-				while (x + j < x + i && y - j > y - i) {
-					board[x + j][y - j] = type;
-					++sum;
-					++j;
-				}
-				break;
-			}
-			++i;
-
-		}
-		return sum;
-	}
 
 	public int shout(int sum) {
 		if (sum >= 8)
@@ -219,14 +48,17 @@ public class Role {
 
 	public int reverse(int x, int y, int type) { // 往8個方向進行反轉
 		int sum = 0;
-		sum = reverseRight(x, y, type, sum);
-		sum = reverseLeft(x, y, type, sum);
-		sum = reverseUp(x, y, type, sum);
-		sum = reverseDown(x, y, type, sum);
-		sum = reverseRightAndUp(x, y, type, sum);
-		sum = reverseRightAndDown(x, y, type, sum);
-		sum = reverseLeftAndUp(x, y, type, sum);
-		sum = reverseLeftAndDown(x, y, type, sum);
+		ReverseDirection rd = new ReverseDirection(board);
+		sum = rd.reverseRight(x, y, type, sum);
+		sum = rd.reverseLeft(x, y, type, sum);
+		sum = rd.reverseUp(x, y, type, sum);
+		sum = rd.reverseDown(x, y, type, sum);
+		sum = rd.reverseRightAndUp(x, y, type, sum);
+		sum = rd.reverseRightAndDown(x, y, type, sum);
+		sum = rd.reverseLeftAndUp(x, y, type, sum);
+		sum = rd.reverseLeftAndDown(x, y, type, sum);
+		
+		board = rd.getBoard();
 		return shout(sum); // 是否播放音效
 
 	}
