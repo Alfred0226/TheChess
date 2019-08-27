@@ -137,7 +137,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 
 		try {// 開始畫面
 
-			startIcon = new ImageIcon("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\back.jpg");
+			startIcon = new ImageIcon("res/pic/back.jpg");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -170,7 +170,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 
 		try {// 棋盤
 
-			icon1 = new ImageIcon("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\board.jpg");
+			icon1 = new ImageIcon("res/pic/board.jpg");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -184,7 +184,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 
 		try {// 背景圖片
 
-			ImageIcon icon = new ImageIcon("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO/backgroundG.jpg");
+			ImageIcon icon = new ImageIcon("res/pic/backgroundG.jpg");
 			JLabel lb = new JLabel(icon);
 			lb.setSize(1200, 800);
 			lb.setLocation(0, 0);
@@ -217,7 +217,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		g.fillRect(0, 0, image.getWidth(null), image.getHeight(null));
 		Image backg = null;
 		try {
-			backg = ImageIO.read(new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\backgroundG.jpg"));
+			backg = ImageIO.read(new File("res/pic/backgroundG.jpg"));
 		} catch (IOException e13) {
 			// TODO Auto-generated catch block
 			e13.printStackTrace();
@@ -231,7 +231,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 				case 1:
 					Image shit = null;
 					try {
-						shit = ImageIO.read(new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\1.png"));
+						shit = ImageIO.read(new File("res/pic/1.png"));
 					} catch (IOException e13) {
 						// TODO Auto-generated catch block
 						e13.printStackTrace();
@@ -242,7 +242,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 				case 2:
 					Image kingB = null;
 					try {
-						kingB = ImageIO.read(new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\2.png"));
+						kingB = ImageIO.read(new File("res/pic/2.png"));
 					} catch (IOException e14) {
 						// TODO Auto-generated catch block
 						e14.printStackTrace();
@@ -253,7 +253,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 				case 3:
 					Image guardB = null;
 					try {
-						guardB = ImageIO.read(new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\3.png"));
+						guardB = ImageIO.read(new File("res/pic/3.png"));
 					} catch (IOException e13) {
 						// TODO Auto-generated catch block
 						e13.printStackTrace();
@@ -265,7 +265,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 					Image rock = null;
 
 					try {
-						rock = ImageIO.read(new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\4.png"));
+						rock = ImageIO.read(new File("res/pic/4.png"));
 
 					} catch (IOException e13) {
 						// TODO Auto-generated catch block
