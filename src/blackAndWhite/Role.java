@@ -60,14 +60,7 @@ public class Role {
 		FindPath fp = new FindPath(board);
 		for (int i = 0; i < 10; ++i) {
 			for (int j = 0; j < 10; ++j) {
-				fp.findPathUp(x, y, type);
-				fp.findPathDown(x, y, type);
-				fp.findPathLeft(x, y, type);
-				fp.findPathRight(x, y, type);
-				fp.findPathLeftAndUp(x, y, type);
-				fp.findPathLeftAndDown(x, y, type);
-				fp.findPathRightAndUp(x, y, type);
-				fp.findPathRightAndDown(x, y, type);
+				fp.findPathAll(x, y, type);
 			}
 		}
 		fp.getBoard();

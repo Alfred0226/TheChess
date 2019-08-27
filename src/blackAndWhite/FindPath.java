@@ -161,5 +161,16 @@ public class FindPath {
 			}
 		}
 	}
+	public void findPathAll(int x, int y, int type)
+	{
+		findPathUp(x, y, type);
+		findPathDown(x, y, type);
+		findPathLeft(x, y, type);
+		findPathRight(x, y, type);
+		findPathLeftAndUp(x, y, type);
+		findPathLeftAndDown(x, y, type);
+		findPathRightAndUp(x, y, type);
+		findPathRightAndDown(x, y, type);
+	}
 
 }
