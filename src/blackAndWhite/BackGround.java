@@ -313,7 +313,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 								role.setBoard(i, j, 2);
 								num = role.reverse(i, j, 2);
 								if (num == 1) {
-									ff = new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\new\\new\\Converted-IAN-oraora.wav"); // 引号里面的是音乐文件所在的路径
+									ff = new File("res/muz/Converted-IAN-oraora.wav"); // 引号里面的是音乐文件所在的路径
 									try {
 										cb = ff.toURL();
 									} catch (MalformedURLException e1) {
@@ -328,7 +328,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 									System.out.println("Ora Ora Ora");
 								}
 								else if (num == 2) {
-									ff = new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\new\\new\\Converted-star.wav"); // 引号里面的是音乐文件所在的路径
+									ff = new File("res/muz/Converted-star.wav"); // 引号里面的是音乐文件所在的路径
 									try {
 										cb = ff.toURL();
 									} catch (MalformedURLException e1) {
@@ -369,7 +369,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 								role.setBoard(i, j, 3);
 								num = role.reverse(i, j, 3);
 								if (num == 1) {
-									ff = new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\new\\new\\Converted-mudamuda.wav"); // 引号里面的是音乐文件所在的路径
+									ff = new File("res/muz/Converted-mudamuda.wav"); // 引号里面的是音乐文件所在的路径
 									try {
 										cb = ff.toURL();
 									} catch (MalformedURLException e1) {
@@ -384,7 +384,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 									System.out.println("Muda Muda Muda");
 								}
 								else if (num == 2) {
-									ff = new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\new\\new\\Converted-IAN-zawarudo.wav"); // 引号里面的是音乐文件所在的路径
+									ff = new File("res/muz/Converted-IAN-zawarudo.wav"); // 引号里面的是音乐文件所在的路径
 									try {
 										cb = ff.toURL();
 									} catch (MalformedURLException e1) {
@@ -474,7 +474,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 			try {// 此寫法 會是按第二次可以暫停第一次的 但是無法排列順序
 
 				if (f == null) {
-					f = new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\complete.wav"); // 引?里面的是音?文件所在的路?
+					f = new File("res/muz/complete.wav"); // 引?里面的是音?文件所在的路?
 					AudioInputStream astr = AudioSystem.getAudioInputStream(f);
 					AudioFormat afmt = astr.getFormat();
 					DataLine.Info inf = new DataLine.Info(SourceDataLine.class, afmt);
