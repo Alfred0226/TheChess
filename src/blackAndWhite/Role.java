@@ -49,15 +49,7 @@ public class Role {
 	public int reverse(int x, int y, int type) { // 往8個方向進行反轉
 		int sum = 0;
 		ReverseDirection rd = new ReverseDirection(board);
-		sum = rd.reverseRight(x, y, type, sum);
-		sum = rd.reverseLeft(x, y, type, sum);
-		sum = rd.reverseUp(x, y, type, sum);
-		sum = rd.reverseDown(x, y, type, sum);
-		sum = rd.reverseRightAndUp(x, y, type, sum);
-		sum = rd.reverseRightAndDown(x, y, type, sum);
-		sum = rd.reverseLeftAndUp(x, y, type, sum);
-		sum = rd.reverseLeftAndDown(x, y, type, sum);
-		
+		sum = rd.reverseAll(x, y, type);
 		board = rd.getBoard();
 		return shout(sum); // 是否播放音效
 

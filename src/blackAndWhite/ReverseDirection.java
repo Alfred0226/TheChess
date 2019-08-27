@@ -187,4 +187,19 @@ public class ReverseDirection {
 		}
 		return sum;
 	}
+	
+	public int reverseAll(int x, int y, int type)
+	{
+		int sum = 0;
+		sum = reverseRight(x, y, type, sum);
+		sum = reverseLeft(x, y, type, sum);
+		sum = reverseUp(x, y, type, sum);
+		sum = reverseDown(x, y, type, sum);
+		sum = reverseRightAndUp(x, y, type, sum);
+		sum = reverseRightAndDown(x, y, type, sum);
+		sum = reverseLeftAndUp(x, y, type, sum);
+		sum = reverseLeftAndDown(x, y, type, sum);
+		return sum;
+		
+	}
 }
