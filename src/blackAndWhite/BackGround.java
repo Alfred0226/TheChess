@@ -26,7 +26,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 	private int limitMin = 14;
 	private int stepNumber = 0;
 	private Role role = new Role();
-	public JLabel timer;
+	public static JLabel timer;
 	public Image image;
 	private JPanel startPanel;
 	private JLabel title;
@@ -49,29 +49,8 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 	public static void main(String[] args) {// 跑主程式
 		BackGround frame = new BackGround();
 		frame.setVisible(true);
-		while (frame.limitMin >= 0) {
-
-			if (frame.limitSec > 0) {
-
-				frame.limitSec--;
-
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			} else if (frame.limitSec == 0) {
-				frame.limitSec = 59;
-				frame.limitMin--;
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			frame.timer.setText(Integer.toString(frame.limitMin) + ":" + Integer.toString(frame.limitSec));
-		}
+		Timer time = new Timer(14,60);
+		time.start(timer);
 	}
 
 	public BackGround() {
