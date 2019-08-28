@@ -184,7 +184,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 
 		try {// 背景圖片
 
-			ImageIcon icon = new ImageIcon("res/pic/backgroundG.jpg");
+			ImageIcon icon = new ImageIcon("res/pic/back.jpg");
 			JLabel lb = new JLabel(icon);
 			lb.setSize(1200, 800);
 			lb.setLocation(0, 0);
