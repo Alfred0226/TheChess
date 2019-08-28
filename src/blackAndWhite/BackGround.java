@@ -24,14 +24,10 @@ import javax.swing.event.ChangeListener;
 public class BackGround extends JFrame implements MouseListener, ChangeListener, Runnable, ActionListener {
 
 	private int stepNumber = 0;
-	private Role role = new Role();
+	private Rule role = new Rule();
 	public static JLabel timer;
 	public Image image;
-	private JPanel startPanel;
-	private JLabel title;
 	private JButton butStart;
-	private ImageIcon startIcon;
-	private JLabel Start;
 	private boolean musicCheck = false;
 	private File file;
 
@@ -43,11 +39,12 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 	public JLabel count1;
 	public JLabel count2;
 	private boolean paintStart = false;
+	private StartPanel startPanel = new StartPanel();
 
 	public static void main(String[] args) {// 跑主程式
 		BackGround frame = new BackGround();
 		frame.setVisible(true);
-		Timer time = new Timer(14,60);
+		Timer time = new Timer(14, 60);
 		time.start(timer);
 	}
 
@@ -59,27 +56,14 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		setSize(1200, 800);// FRAME大小
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
-		
-		countLab=new JLabel();
-		countLab.setSize(200,100);
-		countLab.setLocation(0,0);
+
+		countLab = new JLabel();
+		countLab.setSize(200, 100);
+		countLab.setLocation(0, 0);
 		add(countLab);
 		countLab.setFont(new Font("標楷體", Font.BOLD, 50));
 		countLab.setForeground(Color.white);
 		countLab.setVisible(true);
-		startPanel = new JPanel();
-
-		startPanel.setSize(1200, 800);
-		startPanel.setLocation(0, 0);
-		startPanel.setVisible(true);
-		startPanel.setLayout(null);
-
-		title = new JLabel("『ZA CHESS』");
-		title.setSize(1200, 200);
-		title.setLocation(0, 100);
-		startPanel.add(title);
-		title.setFont(new Font("標楷體", Font.BOLD, 165));
-		title.setForeground(Color.white);
 
 		count1 = new JLabel("");// 記藍棋數量
 		count1.setSize(200, 100);
@@ -99,19 +83,9 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		count2.setVisible(false);
 		count2.setBackground(Color.BLACK);
 
-		butStart = new JButton("GameStart");
-		butStart.setSize(200, 100);
-		butStart.setLocation(500, 360);
-		startPanel.add(butStart);
+		butStart = startPanel.getStartButton();
 		butStart.setActionCommand("music");
 		butStart.addActionListener(this);
-
-		startIcon = new ImageIcon("res/pic/back.jpg");
-		Start = new JLabel(startIcon);
-		Start.setSize(1200, 800);
-		Start.setLocation(0, 0);
-		startPanel.add(Start);
-		Start.setVisible(true);
 
 		add(startPanel);
 
@@ -122,8 +96,6 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		timer.setVisible(true);
 		timer.setFont(new Font("標楷體", Font.BOLD, 35));
 		timer.setForeground(Color.WHITE);
-
-	
 
 		scoreTable = new JLabel("Score");// 左方計分表
 		scoreTable.setSize(100, 40);
@@ -252,15 +224,14 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		int num = 0;
 		int count1num = role.getChessNumber(2);
 		int count2num = role.getChessNumber(3);
-		if(stepNumber%2==0) {
+		if (stepNumber % 2 == 0) {
 			countLab.setText("JOJO");
-		}
-		else {
+		} else {
 			countLab.setText("Dio");
 		}
 		count1.setText("JOJO:" + Integer.toString(count1num));
 		count2.setText("DIO:" + Integer.toString(count2num));
-	
+
 		thr = new Thread(this);
 
 		thr.start();
@@ -271,7 +242,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 					if (32 + 63 * i <= e.getX() && e.getX() < 32 + 63 * (i + 1) && 50 + 60 * j <= e.getY()
 							&& e.getY() < 50 + 60 * (j + 1)) {
 						if (role.getType(i, j) == 4) {
-							
+
 							if (stepNumber % 2 == 0) {
 								role.clean();
 								role.setBoard(i, j, 2);
@@ -290,8 +261,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 									aau1 = Applet.newAudioClip(cb);
 									aau1.play();
 									System.out.println("Ora Ora Ora");
-								}
-								else if (num == 2) {
+								} else if (num == 2) {
 									ff = new File("res/muz/Converted-star.wav"); // 引号里面的是音乐文件所在的路径
 									try {
 										cb = ff.toURL();
@@ -313,7 +283,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 									++stepNumber;
 									role.canMove(2);
 									repaint();
-									
+
 									if (role.getChessNumber(4) == 0) {
 										if (role.isWin() == 1) {
 											JOptionPane.showMessageDialog(this, "Jotaro WIN!!!", "Result",
@@ -346,8 +316,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 									aau1 = Applet.newAudioClip(cb);
 									aau1.play();
 									System.out.println("Muda Muda Muda");
-								}
-								else if (num == 2) {
+								} else if (num == 2) {
 									ff = new File("res/muz/Converted-IAN-zawarudo.wav"); // 引号里面的是音乐文件所在的路径
 									try {
 										cb = ff.toURL();
@@ -442,15 +411,15 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 					AudioInputStream astr = AudioSystem.getAudioInputStream(file);
 					AudioFormat afmt = astr.getFormat();
 					DataLine.Info inf = new DataLine.Info(SourceDataLine.class, afmt);
-					SourceDataLine l = (SourceDataLine) AudioSystem.getLine(inf);
-					l.open(afmt);
-					l.start();
+					SourceDataLine sdl = (SourceDataLine) AudioSystem.getLine(inf);
+					sdl.open(afmt);
+					sdl.start();
 					byte[] buf = new byte[65536];
 					for (int n = 0; (n = astr.read(buf, 0, buf.length)) > 0;) {
-						l.write(buf, 0, n);
+						sdl.write(buf, 0, n);
 					}
-					l.drain();
-					l.close();
+					sdl.drain();
+					sdl.close();
 
 				}
 

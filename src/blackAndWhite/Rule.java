@@ -2,11 +2,11 @@ package blackAndWhite;
 
 import java.util.Random;
 
-public class Role {
+public class Rule {
 	private int[][] board = new int[10][10];
 	private ReverseDirection rd;
 	
-	public Role() { // 初始化資料,type1為路障,type2,3為旗子,type4為可移動路徑
+	public Rule() { // 初始化資料,type1為路障,type2,3為旗子,type4為可移動路徑
 		Random ran = new Random();
 		for (int i = 0; i < 7;) {
 			int tmp1, tmp2;
