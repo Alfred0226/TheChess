@@ -5,7 +5,7 @@ import java.util.Random;
 public class Role {
 	private int[][] board = new int[10][10];
 
-	public Role() { // 初始化資料,type1為路障,type2,3為旗子,type4為可移動路徑
+	public Role() { // Initialize data: type 1=block, type 2 & 3=flag
 		Random ran = new Random();
 		for (int i = 0; i < 7;) {
 			int tmp1, tmp2;
@@ -16,14 +16,14 @@ public class Role {
 				++i;
 			}
 		}
-		setBoard(4, 4, 2); // 中間4顆棋
+		setBoard(4, 4, 2); // 4 pieces in the middle
 		setBoard(5, 5, 2);
 		setBoard(4, 5, 3);
 		setBoard(5, 4, 3);
 		canMove(2);
 	}
 
-	public void printMap() // 印出棋盤
+	public void printMap() //print the map
 	{
 		for (int i = 0; i < 10; ++i) {
 			for (int j = 0; j < 10; ++j) {
@@ -217,7 +217,7 @@ public class Role {
 			return 0;
 	}
 
-	public int reverse(int x, int y, int type) { // 往8個方向進行反轉
+	public int reverse(int x, int y, int type) { // reverse in 8 directions
 		int sum = 0;
 		sum = reverseRight(x, y, type, sum);
 		sum = reverseLeft(x, y, type, sum);
@@ -227,7 +227,7 @@ public class Role {
 		sum = reverseRightAndDown(x, y, type, sum);
 		sum = reverseLeftAndUp(x, y, type, sum);
 		sum = reverseLeftAndDown(x, y, type, sum);
-		return shout(sum); // 是否播放音效
+		return shout(sum); // ask to play audio
 
 	}
 
@@ -380,7 +380,7 @@ public class Role {
 		}
 	}
 
-	private void pathCheck(int x, int y, int type) { // 往8個方向尋找可移動路徑
+	private void pathCheck(int x, int y, int type) { //find placeable spots in 8 directions
 		for (int i = 0; i < 10; ++i) {
 			for (int j = 0; j < 10; ++j) {
 				findPathUp(x, y, type);
@@ -395,7 +395,7 @@ public class Role {
 		}
 	}
 
-	public void clean() { // 清除不要的可移動路徑
+	public void clean() { // clear unneeded places
 		for (int i = 0; i < 10; ++i) {
 			for (int j = 0; j < 10; ++j) {
 				if (board[i][j] == 4)
@@ -404,7 +404,7 @@ public class Role {
 		}
 	}
 
-	public void canMove(int type) { // 對所有旗子尋找路徑
+	public void canMove(int type) { // find places for all pieces
 		if (type == 2) {
 			for (int i = 0; i < 10; ++i) {
 				for (int j = 0; j < 10; ++j) {
@@ -441,7 +441,7 @@ public class Role {
 		return board[x][y];
 	}
 
-	public int isWin() { // 判斷勝負
+	public int isWin() { // judge the game
 		int p1 = getChessNumber(2);
 		int p2 = getChessNumber(3);
 		if (p1 > p2)
