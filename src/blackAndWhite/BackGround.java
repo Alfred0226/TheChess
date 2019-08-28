@@ -137,7 +137,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 
 		try {// 開始畫面
 
-			startIcon = new ImageIcon("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\back.jpg");
+			startIcon = new ImageIcon("res/pic/back.jpg");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -170,7 +170,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 
 		try {// 棋盤
 
-			icon1 = new ImageIcon("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\board.jpg");
+			icon1 = new ImageIcon("res/pic/board.jpg");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -184,7 +184,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 
 		try {// 背景圖片
 
-			ImageIcon icon = new ImageIcon("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO/backgroundG.jpg");
+			ImageIcon icon = new ImageIcon("res/pic/backgroundG.jpg");
 			JLabel lb = new JLabel(icon);
 			lb.setSize(1200, 800);
 			lb.setLocation(0, 0);
@@ -217,7 +217,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		g.fillRect(0, 0, image.getWidth(null), image.getHeight(null));
 		Image backg = null;
 		try {
-			backg = ImageIO.read(new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\backgroundG.jpg"));
+			backg = ImageIO.read(new File("res/pic/backgroundG.jpg"));
 		} catch (IOException e13) {
 			// TODO Auto-generated catch block
 			e13.printStackTrace();
@@ -231,7 +231,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 				case 1:
 					Image shit = null;
 					try {
-						shit = ImageIO.read(new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\1.png"));
+						shit = ImageIO.read(new File("res/pic/1.png"));
 					} catch (IOException e13) {
 						// TODO Auto-generated catch block
 						e13.printStackTrace();
@@ -242,7 +242,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 				case 2:
 					Image kingB = null;
 					try {
-						kingB = ImageIO.read(new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\2.png"));
+						kingB = ImageIO.read(new File("res/pic/2.png"));
 					} catch (IOException e14) {
 						// TODO Auto-generated catch block
 						e14.printStackTrace();
@@ -253,7 +253,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 				case 3:
 					Image guardB = null;
 					try {
-						guardB = ImageIO.read(new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\3.png"));
+						guardB = ImageIO.read(new File("res/pic/3.png"));
 					} catch (IOException e13) {
 						// TODO Auto-generated catch block
 						e13.printStackTrace();
@@ -265,7 +265,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 					Image rock = null;
 
 					try {
-						rock = ImageIO.read(new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\JO\\4.png"));
+						rock = ImageIO.read(new File("res/pic/4.png"));
 
 					} catch (IOException e13) {
 						// TODO Auto-generated catch block
@@ -313,7 +313,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 								role.setBoard(i, j, 2);
 								num = role.reverse(i, j, 2);
 								if (num == 1) {
-									ff = new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\new\\new\\Converted-IAN-oraora.wav"); // 引号里面的是音乐文件所在的路径
+									ff = new File("res/muz/Converted-IAN-oraora.wav"); // 引号里面的是音乐文件所在的路径
 									try {
 										cb = ff.toURL();
 									} catch (MalformedURLException e1) {
@@ -328,7 +328,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 									System.out.println("Ora Ora Ora");
 								}
 								else if (num == 2) {
-									ff = new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\new\\new\\Converted-star.wav"); // 引号里面的是音乐文件所在的路径
+									ff = new File("res/muz/Converted-star.wav"); // 引号里面的是音乐文件所在的路径
 									try {
 										cb = ff.toURL();
 									} catch (MalformedURLException e1) {
@@ -369,7 +369,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 								role.setBoard(i, j, 3);
 								num = role.reverse(i, j, 3);
 								if (num == 1) {
-									ff = new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\new\\new\\Converted-mudamuda.wav"); // 引号里面的是音乐文件所在的路径
+									ff = new File("res/muz/Converted-mudamuda.wav"); // 引号里面的是音乐文件所在的路径
 									try {
 										cb = ff.toURL();
 									} catch (MalformedURLException e1) {
@@ -384,7 +384,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 									System.out.println("Muda Muda Muda");
 								}
 								else if (num == 2) {
-									ff = new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\new\\new\\Converted-IAN-zawarudo.wav"); // 引号里面的是音乐文件所在的路径
+									ff = new File("res/muz/Converted-IAN-zawarudo.wav"); // 引号里面的是音乐文件所在的路径
 									try {
 										cb = ff.toURL();
 									} catch (MalformedURLException e1) {
@@ -474,7 +474,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 			try {// 此寫法 會是按第二次可以暫停第一次的 但是無法排列順序
 
 				if (f == null) {
-					f = new File("E:\\eclipseWorkSpace\\BlackAndWhite2\\src\\complete.wav"); // 引?里面的是音?文件所在的路?
+					f = new File("res/muz/complete.wav"); // 引?里面的是音?文件所在的路?
 					AudioInputStream astr = AudioSystem.getAudioInputStream(f);
 					AudioFormat afmt = astr.getFormat();
 					DataLine.Info inf = new DataLine.Info(SourceDataLine.class, afmt);
