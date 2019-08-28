@@ -22,8 +22,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class BackGround extends JFrame implements MouseListener, ChangeListener, Runnable, ActionListener {
-	private int limitSec = 60;
-	private int limitMin = 14;
+
 	private int stepNumber = 0;
 	private Role role = new Role();
 	public static JLabel timer;
@@ -34,8 +33,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 	private ImageIcon startIcon;
 	private JLabel Start;
 	private boolean musicCheck = false;
-	private File f;
-	public boolean za = false;
+	private File file;
 
 	private URL cb;
 	private File ff;
@@ -56,14 +54,8 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 	public BackGround() {
 
 		JLabel lb1;
-		JPanel panel;
-		JButton but1;
-		JButton but2;
-
-		ImageIcon chess11 = null;
 		ImageIcon icon1 = null;
-		JLabel countDio;
-		JLabel countJo;
+		JLabel scoreTable;
 		setSize(1200, 800);// FRAME大小
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
@@ -89,7 +81,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		title.setFont(new Font("標楷體", Font.BOLD, 165));
 		title.setForeground(Color.white);
 
-		count1 = new JLabel("suck");// 記藍棋數量
+		count1 = new JLabel("");// 記藍棋數量
 		count1.setSize(200, 100);
 		count1.setLocation(5, 120);
 		add(count1);
@@ -98,7 +90,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		count1.setVisible(false);
 		count1.setBackground(Color.BLACK);
 
-		count2 = new JLabel("suck u ");
+		count2 = new JLabel("");
 		count2.setSize(240, 100);
 		count2.setLocation(5, 70);
 		add(count2);
@@ -114,13 +106,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		butStart.setActionCommand("music");
 		butStart.addActionListener(this);
 
-		try {// 開始畫面
-
-			startIcon = new ImageIcon("res/pic/back.jpg");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		startIcon = new ImageIcon("res/pic/back.jpg");
 		Start = new JLabel(startIcon);
 		Start.setSize(1200, 800);
 		Start.setLocation(0, 0);
@@ -139,13 +125,13 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 
 	
 
-		countJo = new JLabel("Score");// 左方計分表
-		countJo.setSize(100, 40);
-		countJo.setLocation(1000, 40);
-		add(countJo);
-		countJo.setVisible(true);
-		countJo.setFont(new Font("標楷體", Font.BOLD, 35));
-		countJo.setForeground(Color.white);
+		scoreTable = new JLabel("Score");// 左方計分表
+		scoreTable.setSize(100, 40);
+		scoreTable.setLocation(1000, 40);
+		add(scoreTable);
+		scoreTable.setVisible(true);
+		scoreTable.setFont(new Font("標楷體", Font.BOLD, 35));
+		scoreTable.setForeground(Color.white);
 
 		try {// 棋盤
 
@@ -184,7 +170,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 			paintStart = true;
 			Thread thr = new Thread(this);
 			thr.start();
-			za = true;
+
 		}
 		repaint();
 	}
@@ -226,7 +212,6 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 						// TODO Auto-generated catch block
 						e14.printStackTrace();
 					}
-//                   image = ImageIO.read(new File("example.jpg"));
 					g.drawImage(kingB, 284 + 63 * j, 149 + 60 * i, 56, 56, this);
 					break;
 				case 3:
@@ -452,9 +437,9 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		if (musicCheck == false) {
 			try {// 此寫法 會是按第二次可以暫停第一次的 但是無法排列順序
 
-				if (f == null) {
-					f = new File("res/muz/complete.wav"); // 引?里面的是音?文件所在的路?
-					AudioInputStream astr = AudioSystem.getAudioInputStream(f);
+				if (file == null) {
+					file = new File("res/muz/complete.wav"); // 引?里面的是音?文件所在的路?
+					AudioInputStream astr = AudioSystem.getAudioInputStream(file);
 					AudioFormat afmt = astr.getFormat();
 					DataLine.Info inf = new DataLine.Info(SourceDataLine.class, afmt);
 					SourceDataLine l = (SourceDataLine) AudioSystem.getLine(inf);
