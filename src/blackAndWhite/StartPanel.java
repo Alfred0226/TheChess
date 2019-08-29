@@ -20,11 +20,11 @@ public class StartPanel extends JPanel{
 		setVisible(true);
 		setLayout(null);
 		
-		title = new JLabel("°yZA CHESS°z");
+		title = new JLabel("ZA CHESS");
 		title.setSize(1200, 200);
-		title.setLocation(0, 100);
+		title.setLocation(200, 100);
 		add(title);
-		title.setFont(new Font("º–∑¢≈È", Font.BOLD, 165));
+		title.setFont(new Font("ITALIC", Font.BOLD, 165));
 		title.setForeground(Color.white);
 		
 		butStart = new JButton("GameStart");
