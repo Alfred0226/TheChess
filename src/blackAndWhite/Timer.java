@@ -6,7 +6,7 @@ public class Timer {
 	private int limitSec;
 	private int limitMin;
 	
-	public Timer(int minutes , int seconds)
+	public Timer(int minutes , int seconds)	//初始化時間
 	{
 		this.limitMin = minutes;
 		this.limitSec = seconds;
@@ -23,7 +23,7 @@ public class Timer {
 		return -1;
 	}
 	
-	public void start(JLabel label) {
+	public void start(JLabel label) {	//計時開始
 		while (limitMin >= 0) {
 
 			if (limitSec > 0) {

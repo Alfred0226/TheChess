@@ -37,7 +37,7 @@ public class Rule {
 
 
 
-	public int shout(int sum) {
+	public int shout(int sum) {		//音效
 		if (sum >= 8)
 			return 1;
 		else if (sum >= 5)
@@ -52,7 +52,6 @@ public class Rule {
 		sum = rd.reverseAll(x, y, type);
 		board = rd.getBoard();
 		return shout(sum); // 是否播放音效
-
 	}
 
 	

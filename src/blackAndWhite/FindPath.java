@@ -13,10 +13,10 @@ public class FindPath {
 		return board;
 	}	
 	
-	public void findPathUp(int x, int y, int type) {
+	public void findPathUp(int x, int y, int type) {	//判斷路徑
 		if (y != 0) {
 			if (board[x][y - 1] == type) {
-				for (int k = y - 1; k > -1; --k) {
+				for (int k = y - 1; k > -1; --k) {	
 					if (board[x][k] == 0) {
 						board[x][k] = 4;
 						break;
@@ -161,7 +161,7 @@ public class FindPath {
 			}
 		}
 	}
-	public void findPathAll(int x, int y, int type)
+	public void findPathAll(int x, int y, int type)	//判斷全部路徑
 	{
 		findPathUp(x, y, type);
 		findPathDown(x, y, type);

@@ -53,11 +53,11 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		JLabel boardTable;
 		ImageIcon boardIcon = null;
 
-		setSize(1200, 800);// FRAME大小
+		setSize(1200, 800);	// FRAME大小
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
 
-		round = new JLabel();
+		round = new JLabel();	//回合
 		round.setSize(200, 100);
 		round.setLocation(0, 0);
 		add(round);
@@ -65,7 +65,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		round.setForeground(Color.white);
 		round.setVisible(true);
 
-		count1 = new JLabel("");// 記藍棋數量
+		count1 = new JLabel("");	// 棋子數量
 		count1.setSize(200, 100);
 		count1.setLocation(5, 120);
 		add(count1);
@@ -74,7 +74,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		count1.setVisible(false);
 		count1.setBackground(Color.BLACK);
 
-		count2 = new JLabel("");
+		count2 = new JLabel("");	//棋子數量
 		count2.setSize(240, 100);
 		count2.setLocation(5, 70);
 		add(count2);
@@ -138,7 +138,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		repaint();
 	}
 
-	public Image getImage(String url) {
+	public Image getImage(String url) {	//得到目標圖片
 		Image pic = null;
 		try {
 			pic = ImageIO.read(new File(url));
@@ -226,7 +226,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		}
 	}
 
-	public void gameProcess(int i, int j, int thisTerm, int nextTerm) {
+	public void gameProcess(int i, int j, int thisTerm, int nextTerm) {	//遊戲過程
 		int num = 0;
 		rule.clean();
 		rule.setBoard(i, j, thisTerm);
@@ -243,7 +243,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		}
 	}
 
-	public void playSound(String url) {
+	public void playSound(String url) {	//設置音效
 		File ff;
 		ff = new File(url);
 		URL link = null;
@@ -260,7 +260,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		aau.play();
 	}
 
-	public void soundEffect(int role, int num) {
+	public void soundEffect(int role, int num) {	//判斷是否發出音效
 		if (role == 2) {
 			if (num == 1) {
 				playSound("res/muz/Converted-IAN-oraora.wav");
@@ -281,7 +281,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		}
 	}
 
-	public void gameover() {
+	public void gameover() {	//判斷遊戲結束
 		if (rule.getChessNumber(4) == 0) {
 			System.out.println("game over");
 			if (rule.isWin() == 1) {

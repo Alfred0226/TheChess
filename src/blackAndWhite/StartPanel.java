@@ -20,19 +20,19 @@ public class StartPanel extends JPanel{
 		setVisible(true);
 		setLayout(null);
 		
-		title = new JLabel("ZA CHESS");
+		title = new JLabel("ZA CHESS");	//標題
 		title.setSize(1200, 200);
 		title.setLocation(200, 100);
 		add(title);
 		title.setFont(new Font("ITALIC", Font.BOLD, 165));
 		title.setForeground(Color.white);
 		
-		butStart = new JButton("GameStart");
+		butStart = new JButton("GameStart");	//開始按鈕
 		butStart.setSize(200, 100);
 		butStart.setLocation(500, 360);
 		add(butStart);
 		
-		ImageIcon startIcon = new ImageIcon("res/pic/back.jpg");
+		ImageIcon startIcon = new ImageIcon("res/pic/back.jpg");	//開始畫面背景
 		Start = new JLabel(startIcon);
 		Start.setSize(1200, 800);
 		Start.setLocation(0, 0);
