@@ -61,7 +61,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		round.setSize(200, 100);
 		round.setLocation(0, 0);
 		add(round);
-		round.setFont(new Font("標楷體", Font.BOLD, 50));
+		round.setFont(new Font("ITALIC", Font.BOLD, 50));
 		round.setForeground(Color.white);
 		round.setVisible(true);
 
@@ -69,7 +69,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		count1.setSize(200, 100);
 		count1.setLocation(5, 120);
 		add(count1);
-		count1.setFont(new Font("標楷體", Font.BOLD, 50));
+		count1.setFont(new Font("ITALIC", Font.BOLD, 50));
 		count1.setForeground(Color.white);
 		count1.setVisible(false);
 		count1.setBackground(Color.BLACK);
@@ -78,7 +78,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		count2.setSize(240, 100);
 		count2.setLocation(5, 70);
 		add(count2);
-		count2.setFont(new Font("標楷體", Font.BOLD, 50));
+		count2.setFont(new Font("ITALIC", Font.BOLD, 50));
 		count2.setForeground(Color.white);
 		count2.setVisible(false);
 		count2.setBackground(Color.BLACK);
@@ -94,7 +94,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		timer.setLocation(570, 20);
 		add(timer);
 		timer.setVisible(true);
-		timer.setFont(new Font("標楷體", Font.BOLD, 35));
+		timer.setFont(new Font("ITALIC", Font.BOLD, 34));
 		timer.setForeground(Color.WHITE);
 
 		try {// 棋盤
