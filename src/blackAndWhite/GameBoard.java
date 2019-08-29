@@ -21,10 +21,10 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class BackGround extends JFrame implements MouseListener, ChangeListener, Runnable, ActionListener {
+public class GameBoard extends JFrame implements MouseListener, ChangeListener, Runnable, ActionListener {
 
 	private int stepNumber = 0;
-	private Rule role = new Rule();
+	private Rule rule = new Rule();
 	public static JLabel timer;
 	public Image image;
 	private JButton butStart;
@@ -34,7 +34,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 	private URL cb;
 	private File ff;
 	private AudioClip aau1 = null;
-	public JLabel countLab;
+	public JLabel round;
 	public Thread thr;
 	public JLabel count1;
 	public JLabel count2;
@@ -42,28 +42,28 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 	private StartPanel startPanel = new StartPanel();
 
 	public static void main(String[] args) {// 跑主程式
-		BackGround frame = new BackGround();
-		frame.setVisible(true);
+		GameBoard game = new GameBoard();
+		game.setVisible(true);
 		Timer time = new Timer(14, 60);
 		time.start(timer);
 	}
 
-	public BackGround() {
+	public GameBoard() {
 
-		JLabel lb1;
-		ImageIcon icon1 = null;
-		JLabel scoreTable;
+		JLabel boardTable;
+		ImageIcon boardIcon = null;
+	
 		setSize(1200, 800);// FRAME大小
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
 
-		countLab = new JLabel();
-		countLab.setSize(200, 100);
-		countLab.setLocation(0, 0);
-		add(countLab);
-		countLab.setFont(new Font("標楷體", Font.BOLD, 50));
-		countLab.setForeground(Color.white);
-		countLab.setVisible(true);
+		round = new JLabel();
+		round.setSize(200, 100);
+		round.setLocation(0, 0);
+		add(round);
+		round.setFont(new Font("標楷體", Font.BOLD, 50));
+		round.setForeground(Color.white);
+		round.setVisible(true);
 
 		count1 = new JLabel("");// 記藍棋數量
 		count1.setSize(200, 100);
@@ -97,36 +97,29 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		timer.setFont(new Font("標楷體", Font.BOLD, 35));
 		timer.setForeground(Color.WHITE);
 
-		scoreTable = new JLabel("Score");// 左方計分表
-		scoreTable.setSize(100, 40);
-		scoreTable.setLocation(1000, 40);
-		add(scoreTable);
-		scoreTable.setVisible(true);
-		scoreTable.setFont(new Font("標楷體", Font.BOLD, 35));
-		scoreTable.setForeground(Color.white);
 
 		try {// 棋盤
 
-			icon1 = new ImageIcon("res/pic/board.jpg");
+			boardIcon = new ImageIcon("res/pic/board.jpg");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		lb1 = new JLabel(icon1);
-		lb1.setSize(700, 700);
-		lb1.setLocation(250, 50);
-		add(lb1);
-		lb1.setVisible(true);
-		lb1.addMouseListener(this);// 把label當整個棋盤
+		boardTable = new JLabel(boardIcon);
+		boardTable.setSize(700, 700);
+		boardTable.setLocation(250, 50);
+		add(boardTable);
+		boardTable.setVisible(true);
+		boardTable.addMouseListener(this);// 把label當整個棋盤
 
 		try {// 背景圖片
 
 			ImageIcon icon = new ImageIcon("res/pic/back.jpg");
-			JLabel lb = new JLabel(icon);
-			lb.setSize(1200, 800);
-			lb.setLocation(0, 0);
-			add(lb);
-			lb.setVisible(true);
+			JLabel backPic = new JLabel(icon);
+			backPic.setSize(1200, 800);
+			backPic.setLocation(0, 0);
+			add(backPic);
+			backPic.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -163,7 +156,7 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 		for (int i = 0; i < 10; i++)// 畫出棋子位置
 		{
 			for (int j = 0; j < 10; j++) {
-				switch (role.getType(j, i))// 換role.gettype
+				switch (rule.getType(j, i))// 換role.gettype
 				{
 				case 1:
 					Image shit = null;
@@ -222,12 +215,12 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 	@SuppressWarnings("deprecation")
 	public void mouseClicked(MouseEvent e) {
 		int num = 0;
-		int count1num = role.getChessNumber(2);
-		int count2num = role.getChessNumber(3);
+		int count1num = rule.getChessNumber(2);
+		int count2num = rule.getChessNumber(3);
 		if (stepNumber % 2 == 0) {
-			countLab.setText("JOJO");
+			round.setText("JOJO");
 		} else {
-			countLab.setText("Dio");
+			round.setText("Dio");
 		}
 		count1.setText("JOJO:" + Integer.toString(count1num));
 		count2.setText("DIO:" + Integer.toString(count2num));
@@ -241,12 +234,12 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 				for (int j = 0; j < 10; j++) {
 					if (32 + 63 * i <= e.getX() && e.getX() < 32 + 63 * (i + 1) && 50 + 60 * j <= e.getY()
 							&& e.getY() < 50 + 60 * (j + 1)) {
-						if (role.getType(i, j) == 4) {
+						if (rule.getType(i, j) == 4) {
 
 							if (stepNumber % 2 == 0) {
-								role.clean();
-								role.setBoard(i, j, 2);
-								num = role.reverse(i, j, 2);
+								rule.clean();
+								rule.setBoard(i, j, 2);
+								num = rule.reverse(i, j, 2);
 								if (num == 1) {
 									ff = new File("res/muz/Converted-IAN-oraora.wav"); // 引号里面的是音乐文件所在的路径
 									try {
@@ -277,31 +270,19 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 									System.out.println("Star");
 								}
 								++stepNumber;
-								role.canMove(3);
+								rule.canMove(3);
 								repaint();
-								if (role.getChessNumber(4) == 0) {
+								if (rule.getChessNumber(4) == 0) {
 									++stepNumber;
-									role.canMove(2);
+									rule.canMove(2);
 									repaint();
-
-									if (role.getChessNumber(4) == 0) {
-										if (role.isWin() == 1) {
-											JOptionPane.showMessageDialog(this, "Jotaro WIN!!!", "Result",
-													JOptionPane.INFORMATION_MESSAGE);
-										} else if (role.isWin() == 2) {
-											JOptionPane.showMessageDialog(this, "Dio WIN!!!", "Result",
-													JOptionPane.INFORMATION_MESSAGE);
-										} else {
-											JOptionPane.showMessageDialog(this, "Ko no Dio da!!!", "Result",
-													JOptionPane.INFORMATION_MESSAGE);
-										}
-									}
+									gameover();
 								}
 
 							} else if (stepNumber % 2 == 1) {
-								role.clean();
-								role.setBoard(i, j, 3);
-								num = role.reverse(i, j, 3);
+								rule.clean();
+								rule.setBoard(i, j, 3);
+								num = rule.reverse(i, j, 3);
 								if (num == 1) {
 									ff = new File("res/muz/Converted-mudamuda.wav"); // 引号里面的是音乐文件所在的路径
 									try {
@@ -331,41 +312,43 @@ public class BackGround extends JFrame implements MouseListener, ChangeListener,
 									aau1.play();
 									System.out.println("Za warudo");
 								}
-								role.canMove(2);
+								rule.canMove(2);
 								++stepNumber;
 								repaint();
 
-								if (role.getChessNumber(4) == 0) {
+								if (rule.getChessNumber(4) == 0) {
 									++stepNumber;
-									role.canMove(3);
+									rule.canMove(3);
 									repaint();
-									if (role.getChessNumber(4) == 0) {
-										if (role.isWin() == 1) {
-											JOptionPane.showMessageDialog(this, "Jotaro WIN!!!", "Result",
-													JOptionPane.INFORMATION_MESSAGE);
-										} else if (role.isWin() == 2) {
-											JOptionPane.showMessageDialog(this, "Dio WIN!!!", "Result",
-													JOptionPane.INFORMATION_MESSAGE);
-										} else {
-											JOptionPane.showMessageDialog(this, "Ko no Dio da!!!", "Result",
-													JOptionPane.INFORMATION_MESSAGE);
-										}
-
-									}
-
+									gameover();
 								}
 							}
 
 						} else if (stepNumber == 0) {
-							role.canMove(2);
+							rule.canMove(2);
 							repaint();
-
 						}
 					}
 				}
 			}
 		}
-
+	}
+	
+	public void gameover() {
+		if (rule.getChessNumber(4) == 0) {
+			System.out.println("game over");
+			if (rule.isWin() == 1) {
+				JOptionPane.showMessageDialog(this, "Jotaro WIN!!!", "Result",
+						JOptionPane.INFORMATION_MESSAGE);
+			} else if (rule.isWin() == 2) {
+				JOptionPane.showMessageDialog(this, "Dio WIN!!!", "Result",
+						JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(this, "Ko no Dio da!!!", "Result",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+		}
 	}
 
 	@Override

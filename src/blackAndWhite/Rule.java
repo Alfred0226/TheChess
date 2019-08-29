@@ -130,4 +130,6 @@ public class Rule {
 	public void setBoard(int x, int y, int type) {
 		board[x][y] = type;
 	}
+	
+	
 }
