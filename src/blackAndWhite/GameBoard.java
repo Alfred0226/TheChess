@@ -41,7 +41,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 	private Rule rule = new Rule();
 	private StartPanel startPanel = new StartPanel();
 	
-	public static void main(String[] args) {// 跑主程式
+	public static void main(String[] args) {// Run the Main
 		GameBoard game = new GameBoard();
 		game.setVisible(true);
 		Timer time = new Timer(14, 60);
@@ -53,11 +53,11 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		JLabel boardTable;
 		ImageIcon boardIcon = null;
 
-		setSize(1200, 800);	// FRAME大小
+		setSize(1200, 800);	// Frame size
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
 
-		round = new JLabel();	//回合
+		round = new JLabel();	//Round
 		round.setSize(200, 100);
 		round.setLocation(0, 0);
 		add(round);
@@ -65,7 +65,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		round.setForeground(Color.white);
 		round.setVisible(true);
 
-		count1 = new JLabel("");	// 棋子數量
+		count1 = new JLabel("");	// count player 1 pieces amount
 		count1.setSize(200, 100);
 		count1.setLocation(5, 120);
 		add(count1);
@@ -74,7 +74,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		count1.setVisible(false);
 		count1.setBackground(Color.BLACK);
 
-		count2 = new JLabel("");	//棋子數量
+		count2 = new JLabel("");	//count player 2 pieces amount
 		count2.setSize(240, 100);
 		count2.setLocation(5, 70);
 		add(count2);
@@ -89,7 +89,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 
 		add(startPanel);
 
-		timer = new JLabel("timer");// 時間計時器
+		timer = new JLabel("timer");// timer
 		timer.setSize(100, 40);
 		timer.setLocation(570, 20);
 		add(timer);
@@ -97,7 +97,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		timer.setFont(new Font("ITALIC", Font.BOLD, 34));
 		timer.setForeground(Color.WHITE);
 
-		try {// 棋盤
+		try {// board
 
 			boardIcon = new ImageIcon("res/pic/board.jpg");
 
@@ -109,9 +109,9 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		boardTable.setLocation(250, 50);
 		add(boardTable);
 		boardTable.setVisible(true);
-		boardTable.addMouseListener(this);// 把label當整個棋盤
+		boardTable.addMouseListener(this);// let label be the game board
 
-		try {// 背景圖片
+		try {// background image
 
 			ImageIcon icon = new ImageIcon("res/pic/back.jpg");
 			JLabel backPic = new JLabel(icon);
@@ -129,7 +129,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		startPanel.setVisible(false);
 		count1.setVisible(true);
 		count2.setVisible(true);
-		String cmd = e.getActionCommand();// 加在actionperformed
+		String cmd = e.getActionCommand();// add to actionperformed
 		if (cmd.equals("music")) {
 			paintStart = true;
 			Thread thr = new Thread(this);
@@ -138,7 +138,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		repaint();
 	}
 
-	public Image getImage(String url) {	//得到目標圖片
+	public Image getImage(String url) {	//get target image
 		Image pic = null;
 		try {
 			pic = ImageIO.read(new File(url));
@@ -156,10 +156,10 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		g.fillRect(0, 0, image.getWidth(null), image.getHeight(null));
 		Image backg = getImage("res/pic/backgroundG.jpg");
 		g.drawImage(backg, 0, 0, 1200, 800, this);
-		for (int i = 0; i < 10; i++)// 畫出棋子位置
+		for (int i = 0; i < 10; i++)// paint pieces places
 		{
 			for (int j = 0; j < 10; j++) {
-				switch (rule.getType(j, i))// 換role.gettype
+				switch (rule.getType(j, i))// switch role.gettype
 				{
 				case 1:
 					Image barrier = getImage("res/pic/1.png");
@@ -243,7 +243,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		}
 	}
 
-	public void playSound(String url) {	//設置音效
+	public void playSound(String url) {	//setup the audio
 		File ff;
 		ff = new File(url);
 		URL link = null;
@@ -260,7 +260,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		aau.play();
 	}
 
-	public void soundEffect(int role, int num) {	//判斷是否發出音效
+	public void soundEffect(int role, int num) {	//judge the audio 
 		if (role == 2) {
 			if (num == 1) {
 				playSound("res/muz/Converted-IAN-oraora.wav");
@@ -272,16 +272,16 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		}
 		if (role == 3) {
 			if (num == 1) {
-				playSound("res/muz/Converted-mudamuda.wav"); // 引号里面的是音乐文件所在的路径
+				playSound("res/muz/Converted-mudamuda.wav"); // "music file path"
 				System.out.println("Muda Muda Muda");
 			} else if (num == 2) {
-				playSound("res/muz/Converted-IAN-zawarudo.wav"); // 引号里面的是音乐文件所在的路径
+				playSound("res/muz/Converted-IAN-zawarudo.wav"); // "music file path"
 				System.out.println("Za warudo");
 			}
 		}
 	}
 
-	public void gameover() {	//判斷遊戲結束
+	public void gameover() {	//judge the game result
 		if (rule.getChessNumber(4) == 0) {
 			System.out.println("game over");
 			if (rule.isWin() == 1) {
@@ -322,9 +322,9 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 	@Override
 	public void run() {
 		if (musicCheck == false) {
-			try {// 此寫法 會是按第二次可以暫停第一次的 但是無法排列順序
+			try {// the second click can pause the first , but cannot sort the sequence
 				if (file == null) {
-					file = new File("res/muz/complete.wav"); // 引?里面的是音?文件所在的路?
+					file = new File("res/muz/complete.wav"); // "music file path"
 					AudioInputStream astr = AudioSystem.getAudioInputStream(file);
 					AudioFormat afmt = astr.getFormat();
 					DataLine.Info inf = new DataLine.Info(SourceDataLine.class, afmt);

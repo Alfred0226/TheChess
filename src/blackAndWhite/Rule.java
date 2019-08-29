@@ -6,7 +6,7 @@ public class Rule {
 	private int[][] board = new int[10][10];
 	
 	
-	public Rule() { // 初始化資料,type1為路障,type2,3為旗子,type4為可移動路徑
+	public Rule() { // initialize data; type 1 is block; type 2,3 are pieces; type 4 is movable place
 		Random ran = new Random();
 		for (int i = 0; i < 7;) {
 			int tmp1, tmp2;
@@ -17,7 +17,7 @@ public class Rule {
 				++i;
 			}
 		}
-		setBoard(4, 4, 2); // 中間4顆棋
+		setBoard(4, 4, 2); // initial 4 pieces in the middle
 		setBoard(5, 5, 2);
 		setBoard(4, 5, 3);
 		setBoard(5, 4, 3);
@@ -25,7 +25,7 @@ public class Rule {
 		
 	}
 
-	public void printMap() // 印出棋盤
+	public void printMap() // print the game board
 	{
 		for (int i = 0; i < 10; ++i) {
 			for (int j = 0; j < 10; ++j) {
@@ -37,7 +37,7 @@ public class Rule {
 
 
 
-	public int shout(int sum) {		//音效
+	public int shout(int sum) {		//sound effect
 		if (sum >= 8)
 			return 1;
 		else if (sum >= 5)
@@ -46,16 +46,16 @@ public class Rule {
 			return 0;
 	}
 
-	public int reverse(int x, int y, int type) { // 往8個方向進行反轉
+	public int reverse(int x, int y, int type) { //reverse in 8 directions
 		int sum = 0;
 		ReverseDirection rd = new ReverseDirection(board);
 		sum = rd.reverseAll(x, y, type);
 		board = rd.getBoard();
-		return shout(sum); // 是否播放音效
+		return shout(sum); // ask to play audio sound effect
 	}
 
 	
-	private void pathCheck(int x, int y, int type) { // 往8個方向尋找可移動路徑
+	private void pathCheck(int x, int y, int type) { // find the movable places in 8 directions
 		FindPath fp = new FindPath(board);
 		for (int i = 0; i < 10; ++i) {
 			for (int j = 0; j < 10; ++j) {
@@ -65,7 +65,7 @@ public class Rule {
 		fp.getBoard();
 	}
 
-	public void clean() { // 清除不要的可移動路徑
+	public void clean() { // clear the unneeded movable places
 		for (int i = 0; i < 10; ++i) {
 			for (int j = 0; j < 10; ++j) {
 				if (board[i][j] == 4)
@@ -74,7 +74,7 @@ public class Rule {
 		}
 	}
 
-	public void canMove(int type) { // 對所有旗子尋找路徑
+	public void canMove(int type) { // find the movable places for all pieces
 		if (type == 2) {
 			for (int i = 0; i < 10; ++i) {
 				for (int j = 0; j < 10; ++j) {
@@ -111,7 +111,7 @@ public class Rule {
 		return board[x][y];
 	}
 
-	public int isWin() { // 判斷勝負
+	public int isWin() { // judge the result
 		int p1 = getChessNumber(2);
 		int p2 = getChessNumber(3);
 		if (p1 > p2)
