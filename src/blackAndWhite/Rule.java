@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Rule {
 	private int[][] board = new int[10][10];
-	private ReverseDirection rd;
+	
 	
 	public Rule() { // 初始化資料,type1為路障,type2,3為旗子,type4為可移動路徑
 		Random ran = new Random();
