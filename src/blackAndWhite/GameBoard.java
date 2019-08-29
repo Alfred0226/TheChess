@@ -95,7 +95,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		timer.setLocation(570, 20);
 		add(timer);
 		timer.setVisible(true);
-		timer.setFont(new Font("ITALIC", Font.BOLD, 35));
+		timer.setFont(new Font("ITALIC", Font.BOLD, 34));
 		timer.setForeground(Color.WHITE);
 
 		try {// 棋盤
