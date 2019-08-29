@@ -24,23 +24,24 @@ import javax.swing.event.ChangeListener;
 public class GameBoard extends JFrame implements MouseListener, ChangeListener, Runnable, ActionListener {
 
 	private int stepNumber = 0;
-	private Rule rule = new Rule();
-	public static JLabel timer;
-	public Image image;
-	private JButton butStart;
 	private boolean musicCheck = false;
+	private boolean paintStart = false;
+	
+	private JLabel round;
+	private JLabel count1;
+	private JLabel count2;
+	private JButton butStart;
+	private static JLabel timer;
+	
+	private Image image;
 	private File file;
-
+	private Thread thr;
 	private URL cb;
 	private File ff;
-	private AudioClip aau1 = null;
-	public JLabel round;
-	public Thread thr;
-	public JLabel count1;
-	public JLabel count2;
-	private boolean paintStart = false;
+	private AudioClip aau = null;
+	private Rule rule = new Rule();
 	private StartPanel startPanel = new StartPanel();
-
+	
 	public static void main(String[] args) {// 跑主程式
 		GameBoard game = new GameBoard();
 		game.setVisible(true);
@@ -52,7 +53,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 
 		JLabel boardTable;
 		ImageIcon boardIcon = null;
-	
+
 		setSize(1200, 800);// FRAME大小
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
@@ -97,7 +98,6 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		timer.setFont(new Font("標楷體", Font.BOLD, 35));
 		timer.setForeground(Color.WHITE);
 
-
 		try {// 棋盤
 
 			boardIcon = new ImageIcon("res/pic/board.jpg");
@@ -135,9 +135,20 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 			paintStart = true;
 			Thread thr = new Thread(this);
 			thr.start();
-
 		}
 		repaint();
+	}
+
+	public Image getImage(String url) {
+		Image pic = null;
+		try {
+			pic = ImageIO.read(new File(url));
+		} catch (IOException e13) {
+			// TODO Auto-generated catch block
+			e13.printStackTrace();
+		}
+		return pic;
+
 	}
 
 	private void drawBufferedImage() {
@@ -145,13 +156,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		Graphics g = image.getGraphics();
 		g.setColor(Color.yellow);
 		g.fillRect(0, 0, image.getWidth(null), image.getHeight(null));
-		Image backg = null;
-		try {
-			backg = ImageIO.read(new File("res/pic/backgroundG.jpg"));
-		} catch (IOException e13) {
-			// TODO Auto-generated catch block
-			e13.printStackTrace();
-		}
+		Image backg = getImage("res/pic/backgroundG.jpg");
 		g.drawImage(backg, 0, 0, 1200, 800, this);
 		for (int i = 0; i < 10; i++)// 畫出棋子位置
 		{
@@ -159,49 +164,21 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 				switch (rule.getType(j, i))// 換role.gettype
 				{
 				case 1:
-					Image shit = null;
-					try {
-						shit = ImageIO.read(new File("res/pic/1.png"));
-					} catch (IOException e13) {
-						// TODO Auto-generated catch block
-						e13.printStackTrace();
-					}
-					g.drawImage(shit, 284 + 63 * j, 149 + 60 * i, 56, 56, this);
-
+					Image barrier = getImage("res/pic/1.png");
+					g.drawImage(barrier, 284 + 63 * j, 149 + 60 * i, 56, 56, this);
 					break;
 				case 2:
-					Image kingB = null;
-					try {
-						kingB = ImageIO.read(new File("res/pic/2.png"));
-					} catch (IOException e14) {
-						// TODO Auto-generated catch block
-						e14.printStackTrace();
-					}
-					g.drawImage(kingB, 284 + 63 * j, 149 + 60 * i, 56, 56, this);
+					Image chessA = getImage("res/pic/2.png");
+					g.drawImage(chessA, 284 + 63 * j, 149 + 60 * i, 56, 56, this);
 					break;
 				case 3:
-					Image guardB = null;
-					try {
-						guardB = ImageIO.read(new File("res/pic/3.png"));
-					} catch (IOException e13) {
-						// TODO Auto-generated catch block
-						e13.printStackTrace();
-					}
-					g.drawImage(guardB, 284 + 63 * j, 149 + 60 * i, 56, 56, this);
+					Image chessB = getImage("res/pic/3.png");
+					g.drawImage(chessB, 284 + 63 * j, 149 + 60 * i, 56, 56, this);
 					break;
 
 				case 4:
-					Image rock = null;
-
-					try {
-						rock = ImageIO.read(new File("res/pic/4.png"));
-
-					} catch (IOException e13) {
-						// TODO Auto-generated catch block
-						e13.printStackTrace();
-					}
+					Image rock = getImage("res/pic/4.png");
 					g.drawImage(rock, 284 + 63 * j, 149 + 60 * i, 56, 56, this);
-
 					break;
 
 				default:
@@ -212,7 +189,6 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public void mouseClicked(MouseEvent e) {
 		int num = 0;
 		int count1num = rule.getChessNumber(2);
@@ -237,91 +213,9 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 						if (rule.getType(i, j) == 4) {
 
 							if (stepNumber % 2 == 0) {
-								rule.clean();
-								rule.setBoard(i, j, 2);
-								num = rule.reverse(i, j, 2);
-								if (num == 1) {
-									ff = new File("res/muz/Converted-IAN-oraora.wav"); // 引号里面的是音乐文件所在的路径
-									try {
-										cb = ff.toURL();
-									} catch (MalformedURLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-									if (aau1 != null) {
-										aau1.stop();
-									}
-									aau1 = Applet.newAudioClip(cb);
-									aau1.play();
-									System.out.println("Ora Ora Ora");
-								} else if (num == 2) {
-									ff = new File("res/muz/Converted-star.wav"); // 引号里面的是音乐文件所在的路径
-									try {
-										cb = ff.toURL();
-									} catch (MalformedURLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-									if (aau1 != null) {
-										aau1.stop();
-									}
-									aau1 = Applet.newAudioClip(cb);
-									aau1.play();
-									System.out.println("Star");
-								}
-								++stepNumber;
-								rule.canMove(3);
-								repaint();
-								if (rule.getChessNumber(4) == 0) {
-									++stepNumber;
-									rule.canMove(2);
-									repaint();
-									gameover();
-								}
-
+								gameProcess(i, j, 2, 3);
 							} else if (stepNumber % 2 == 1) {
-								rule.clean();
-								rule.setBoard(i, j, 3);
-								num = rule.reverse(i, j, 3);
-								if (num == 1) {
-									ff = new File("res/muz/Converted-mudamuda.wav"); // 引号里面的是音乐文件所在的路径
-									try {
-										cb = ff.toURL();
-									} catch (MalformedURLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-									if (aau1 != null) {
-										aau1.stop();
-									}
-									aau1 = Applet.newAudioClip(cb);
-									aau1.play();
-									System.out.println("Muda Muda Muda");
-								} else if (num == 2) {
-									ff = new File("res/muz/Converted-IAN-zawarudo.wav"); // 引号里面的是音乐文件所在的路径
-									try {
-										cb = ff.toURL();
-									} catch (MalformedURLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-									if (aau1 != null) {
-										aau1.stop();
-									}
-									aau1 = Applet.newAudioClip(cb);
-									aau1.play();
-									System.out.println("Za warudo");
-								}
-								rule.canMove(2);
-								++stepNumber;
-								repaint();
-
-								if (rule.getChessNumber(4) == 0) {
-									++stepNumber;
-									rule.canMove(3);
-									repaint();
-									gameover();
-								}
+								gameProcess(i, j, 3, 2);
 							}
 
 						} else if (stepNumber == 0) {
@@ -333,62 +227,102 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 			}
 		}
 	}
-	
+
+	public void gameProcess(int i, int j, int thisTerm, int nextTerm) {
+		int num = 0;
+		rule.clean();
+		rule.setBoard(i, j, thisTerm);
+		num = rule.reverse(i, j, thisTerm);
+		soundEffect(thisTerm, num);
+		++stepNumber;
+		rule.canMove(nextTerm);
+		repaint();
+		if (rule.getChessNumber(4) == 0) {
+			++stepNumber;
+			rule.canMove(thisTerm);
+			repaint();
+			gameover();
+		}
+	}
+
+	public void playSound(String url) {
+		ff = new File(url);
+		try {
+			cb = ff.toURL();
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if (aau != null) {
+			aau.stop();
+		}
+		aau = Applet.newAudioClip(cb);
+		aau.play();
+	}
+
+	public void soundEffect(int role, int num) {
+		if (role == 2) {
+			if (num == 1) {
+				playSound("res/muz/Converted-IAN-oraora.wav");
+				System.out.println("Ora Ora Ora");
+			} else if (num == 2) {
+				playSound("res/muz/Converted-star.wav");
+				System.out.println("Star");
+			}
+		}
+		if (role == 3) {
+			if (num == 1) {
+				playSound("res/muz/Converted-mudamuda.wav"); // 引号里面的是音乐文件所在的路径
+				System.out.println("Muda Muda Muda");
+			} else if (num == 2) {
+				playSound("res/muz/Converted-IAN-zawarudo.wav"); // 引号里面的是音乐文件所在的路径
+				System.out.println("Za warudo");
+			}
+		}
+	}
+
 	public void gameover() {
 		if (rule.getChessNumber(4) == 0) {
 			System.out.println("game over");
 			if (rule.isWin() == 1) {
-				JOptionPane.showMessageDialog(this, "Jotaro WIN!!!", "Result",
-						JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Jotaro WIN!!!", "Result", JOptionPane.INFORMATION_MESSAGE);
 			} else if (rule.isWin() == 2) {
-				JOptionPane.showMessageDialog(this, "Dio WIN!!!", "Result",
-						JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Dio WIN!!!", "Result", JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				JOptionPane.showMessageDialog(this, "Ko no Dio da!!!", "Result",
-						JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Ko no Dio da!!!", "Result", JOptionPane.INFORMATION_MESSAGE);
 			}
-			
 		}
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void run() {
-
 		if (musicCheck == false) {
 			try {// 此寫法 會是按第二次可以暫停第一次的 但是無法排列順序
-
 				if (file == null) {
 					file = new File("res/muz/complete.wav"); // 引?里面的是音?文件所在的路?
 					AudioInputStream astr = AudioSystem.getAudioInputStream(file);
@@ -403,11 +337,8 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 					}
 					sdl.drain();
 					sdl.close();
-
 				}
-
 			} catch (MalformedURLException e1) {
-
 				e1.printStackTrace();
 			} catch (UnsupportedAudioFileException e1) {
 				// TODO Auto-generated catch block
@@ -427,9 +358,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		if (paintStart == false) {
 			super.paint(g);
 		}
-
 		if (paintStart) {
-
 			drawBufferedImage();
 			g.drawImage(image, 0, 0, this);
 		}
