@@ -36,9 +36,8 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 	private Image image;
 	private File file;
 	private Thread thr;
-	private URL cb;
-	private File ff;
 	private AudioClip aau = null;
+	
 	private Rule rule = new Rule();
 	private StartPanel startPanel = new StartPanel();
 	
@@ -148,7 +147,6 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 			e13.printStackTrace();
 		}
 		return pic;
-
 	}
 
 	private void drawBufferedImage() {
@@ -246,9 +244,11 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 	}
 
 	public void playSound(String url) {
+		File ff;
 		ff = new File(url);
+		URL link = null;
 		try {
-			cb = ff.toURL();
+			link = ff.toURL();
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -256,7 +256,7 @@ public class GameBoard extends JFrame implements MouseListener, ChangeListener, 
 		if (aau != null) {
 			aau.stop();
 		}
-		aau = Applet.newAudioClip(cb);
+		aau = Applet.newAudioClip(link);
 		aau.play();
 	}
 
